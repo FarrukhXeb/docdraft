@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@layer base {
+  .dd-card-content {
+    padding-top: 0;
+  }
+}
+
 /* ==========================================================================
    DocDraft design tokens
    Ported from the DocDraft design system (tokens/*.css). These CSS custom
@@ -393,7 +399,7 @@ body {
   transition: var(--transition-colors);
 }
 .dd-card-link:hover {
-  border-color: var(--border-strong);
+  border-color: var(--border-strong) !important;
 }
 
 .dd-scroll::-webkit-scrollbar {

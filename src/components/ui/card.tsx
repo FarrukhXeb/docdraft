@@ -97,10 +97,16 @@ CardDescription.displayName = "CardDescription";
 export const CardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
->(({ style, children, ...rest }, ref) => (
+>(({ style, className = "", children, ...rest }, ref) => (
   <div
     ref={ref}
-    style={{ padding: "var(--pad-card)", paddingTop: 0, ...style }}
+    className={`dd-card-content ${className}`.trim()}
+    style={{
+      paddingLeft: "var(--pad-card)",
+      paddingRight: "var(--pad-card)",
+      paddingBottom: "var(--pad-card)",
+      ...style,
+    }}
     {...rest}
   >
     {children}

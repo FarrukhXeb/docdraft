@@ -66,6 +66,15 @@ export interface IconProps extends React.SVGAttributes<SVGSVGElement> {
   title?: string;
 }
 
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 /** Inline Lucide icon. Strokes in currentColor, so it inherits the parent's text colour. */
 export function Icon({ name, size = 16, title, style, ...rest }: IconProps) {
   const inner = ICON_PATHS[name];
@@ -92,7 +101,8 @@ export function Icon({ name, size = 16, title, style, ...rest }: IconProps) {
         ...style,
       }}
       dangerouslySetInnerHTML={{
-        __html: (title ? "<title>" + title + "</title>" : "") + inner,
+        __html:
+          (title ? "<title>" + escapeHtml(title) + "</title>" : "") + inner,
       }}
       {...rest}
     />
