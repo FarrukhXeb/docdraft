@@ -1,20 +1,31 @@
 import * as React from "react";
-import { cn } from "@/lib/utils";
 
-const Input = React.forwardRef<
-  HTMLInputElement,
-  React.InputHTMLAttributes<HTMLInputElement>
->(({ className, type, ...props }, ref) => (
-  <input
-    type={type}
-    ref={ref}
-    className={cn(
-      "flex h-9 w-full rounded-md border border-slate-300 bg-white px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 disabled:cursor-not-allowed disabled:opacity-50",
-      className
-    )}
-    {...props}
-  />
-));
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  invalid?: boolean;
+}
+
+/** Single-line text field. Mirrors ui/input.tsx (h-9, 6px radius, 2px focus ring). */
+export const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ invalid = false, style, className = "", ...rest }, ref) => (
+    <input
+      ref={ref}
+      className={`dd-field ${className}`.trim()}
+      aria-invalid={invalid || undefined}
+      style={{
+        width: "100%",
+        height: "var(--h-control)",
+        borderRadius: "var(--radius-md)",
+        border: `1px solid ${invalid ? "var(--danger)" : "var(--border-default)"}`,
+        background: "var(--surface-card)",
+        color: "var(--text-primary)",
+        padding: "0 var(--pad-control-x)",
+        font: "var(--type-body)",
+        boxShadow: "var(--shadow-xs)",
+        ...style,
+      }}
+      {...rest}
+    />
+  )
+);
 Input.displayName = "Input";
-
-export { Input };
