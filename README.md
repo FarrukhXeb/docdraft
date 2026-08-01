@@ -22,7 +22,7 @@ laptop — no cloud, no billing, no deploy.
 
 ## Stack
 
-- **Next.js (App Router) + TypeScript + Tailwind CSS v4 + shadcn-style UI**
+- **Next.js (App Router) + TypeScript + Tailwind CSS v4 + ported DocDraft design-system UI** (see `AGENTS.md` for the component/token layout)
 - **Postgres** in Docker (`docker-compose.yml`)
 - **Prisma** for schema + migrations
 - **better-auth** (email/password) — auth as a library on the local Postgres
