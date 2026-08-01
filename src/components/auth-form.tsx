@@ -6,12 +6,16 @@ import Link from "next/link";
 import { signIn, signUp } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Field } from "@/components/ui/field";
+import { Alert } from "@/components/ui/alert";
+import { Logo } from "@/components/ui/logo";
+import { Icon } from "@/components/ui/icon";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
+  CardDescription,
 } from "@/components/ui/card";
 
 export function AuthForm({ mode }: { mode: "login" | "register" }) {
@@ -47,90 +51,150 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
   }
 
   return (
-    <main className="mx-auto flex min-h-screen max-w-md flex-col justify-center px-6">
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-xl">
-            {isRegister ? "Create your account" : "Welcome back"}
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={onSubmit} className="space-y-4">
-            {isRegister && (
-              <div className="space-y-1.5">
-                <Label htmlFor="name">Name</Label>
-                <Input
-                  id="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                  autoComplete="name"
-                />
-              </div>
-            )}
-            <div className="space-y-1.5">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                autoComplete="email"
-              />
-            </div>
-            <div className="space-y-1.5">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                minLength={8}
-                autoComplete={isRegister ? "new-password" : "current-password"}
-              />
-              {isRegister && (
-                <p className="text-xs text-slate-500">
-                  At least 8 characters.
-                </p>
-              )}
-            </div>
-
-            {error && (
-              <p className="rounded-md bg-red-50 p-2 text-sm text-red-700">
-                {error}
-              </p>
-            )}
-
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading
-                ? "Please wait..."
-                : isRegister
-                  ? "Create account"
-                  : "Log in"}
-            </Button>
-          </form>
-
-          <p className="mt-4 text-center text-sm text-slate-600">
-            {isRegister ? (
-              <>
-                Already have an account?{" "}
-                <Link href="/login" className="font-medium underline">
-                  Log in
-                </Link>
-              </>
-            ) : (
-              <>
-                Need an account?{" "}
-                <Link href="/register" className="font-medium underline">
-                  Register
-                </Link>
-              </>
-            )}
+    <main
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "var(--space-6)",
+        padding: "var(--space-12) var(--gutter-page)",
+        background: "var(--surface-app)",
+      }}
+    >
+      <div
+        style={{
+          width: "var(--width-form)",
+          maxWidth: "100%",
+          display: "flex",
+          flexDirection: "column",
+          gap: "var(--space-6)",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "var(--space-3)",
+          }}
+        >
+          <Logo size="lg" />
+          <p
+            style={{
+              margin: 0,
+              font: "var(--type-body)",
+              fontSize: "var(--text-base)",
+              color: "var(--text-secondary)",
+              textAlign: "center",
+              textWrap: "pretty",
+            }}
+          >
+            Draft RFP and proposal responses in minutes.
           </p>
-        </CardContent>
-      </Card>
+        </div>
+
+        <Card>
+          <CardHeader>
+            <CardTitle style={{ fontSize: "var(--text-xl)" }}>
+              {isRegister ? "Create your account" : "Welcome back"}
+            </CardTitle>
+            <CardDescription>
+              {isRegister
+                ? "Your answer library stays private to your firm."
+                : "Sign in to your proposals and answer library."}
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form
+              onSubmit={onSubmit}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "var(--space-4)",
+              }}
+            >
+              {isRegister && (
+                <Field label="Name" htmlFor="name">
+                  <Input
+                    id="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                    autoComplete="name"
+                  />
+                </Field>
+              )}
+              <Field label="Email" htmlFor="email">
+                <Input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  autoComplete="email"
+                />
+              </Field>
+              <Field
+                label="Password"
+                htmlFor="password"
+                hint={isRegister ? "At least 8 characters." : undefined}
+              >
+                <Input
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  minLength={8}
+                  autoComplete={
+                    isRegister ? "new-password" : "current-password"
+                  }
+                />
+              </Field>
+
+              {error && <Alert tone="danger">{error}</Alert>}
+
+              <Button type="submit" fullWidth loading={loading}>
+                {isRegister ? "Create account" : "Log in"}
+              </Button>
+            </form>
+
+            <p
+              style={{
+                margin: "var(--space-4) 0 0",
+                textAlign: "center",
+                font: "var(--type-body)",
+                color: "var(--text-secondary)",
+              }}
+            >
+              {isRegister ? "Already have an account? " : "Need an account? "}
+              <Link
+                href={isRegister ? "/login" : "/register"}
+                style={{ fontWeight: "var(--weight-medium)" }}
+              >
+                {isRegister ? "Log in" : "Register"}
+              </Link>
+            </p>
+          </CardContent>
+        </Card>
+
+        <p
+          style={{
+            margin: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "var(--space-2)",
+            font: "var(--type-meta)",
+            color: "var(--text-muted)",
+          }}
+        >
+          <Icon name="settings" size={12} /> Your drafts and library never leave
+          your workspace.
+        </p>
+      </div>
     </main>
   );
 }

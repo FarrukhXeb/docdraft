@@ -24,15 +24,15 @@ export default async function ProposalDetailPage({ params }: Params) {
         <div>
           <Link
             href="/proposals"
-            className="text-sm text-slate-500 hover:underline"
+            className="text-sm text-[var(--text-muted)] hover:underline"
           >
             ← All proposals
           </Link>
-          <h1 className="mt-1 text-2xl font-bold text-slate-900">
+          <h1 className="mt-1 text-2xl font-bold text-[var(--text-primary)]">
             {proposal.title}
           </h1>
           {proposal.companyName && (
-            <p className="text-slate-600">{proposal.companyName}</p>
+            <p className="text-[var(--text-secondary)]">{proposal.companyName}</p>
           )}
         </div>
 

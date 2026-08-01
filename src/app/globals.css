@@ -1,17 +1,417 @@
 @import "tailwindcss";
 
-:root {
-  --background: #f8fafc;
-  --foreground: #0f172a;
+@layer base {
+  .dd-card-content {
+    padding-top: 0;
+  }
 }
+
+/* ==========================================================================
+   DocDraft design tokens
+   Ported from the DocDraft design system (tokens/*.css). These CSS custom
+   properties are the single source of truth for colour, type, spacing,
+   elevation and motion. Components in src/components/ui read them directly,
+   so dark mode flips automatically via :root[data-theme="dark"].
+   ========================================================================== */
+
+:root {
+  /* neutral (slate) */
+  --slate-50: #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;
+  --slate-950: #020617;
+
+  /* brand navy */
+  --navy-50: #f1f5fb;
+  --navy-100: #dfe8f6;
+  --navy-200: #c1d3ec;
+  --navy-300: #94b2dd;
+  --navy-400: #5f89c8;
+  --navy-500: #3b6ab0;
+  --navy-600: #2b5394;
+  --navy-700: #234478;
+  --navy-800: #1f3a63;
+  --navy-900: #1d3253;
+  --navy-950: #131f34;
+
+  /* status hues */
+  --blue-50: #eff6ff;
+  --blue-100: #dbeafe;
+  --blue-700: #1d4ed8;
+  --green-50: #f0fdf4;
+  --green-100: #dcfce7;
+  --green-700: #15803d;
+  --amber-50: #fffbeb;
+  --amber-100: #fef3c7;
+  --amber-800: #92400e;
+  --red-50: #fef2f2;
+  --red-100: #fee2e2;
+  --red-500: #ef4444;
+  --red-600: #dc2626;
+  --red-700: #b91c1c;
+
+  /* semantic — surfaces */
+  --surface-app: var(--slate-50);
+  --surface-card: #ffffff;
+  --surface-raised: #ffffff;
+  --surface-sunken: var(--slate-100);
+  --surface-inset: var(--slate-50);
+  --surface-inverse: var(--slate-900);
+  --surface-hover: var(--slate-100);
+  --surface-active: var(--slate-200);
+  --surface-selected: var(--navy-50);
+
+  /* semantic — text */
+  --text-primary: var(--slate-900);
+  --text-body: var(--slate-700);
+  --text-secondary: var(--slate-600);
+  --text-muted: var(--slate-500);
+  --text-placeholder: var(--slate-400);
+  --text-inverse: #ffffff;
+  --text-link: var(--navy-600);
+  --text-link-hover: var(--navy-700);
+
+  /* semantic — borders */
+  --border-subtle: var(--slate-200);
+  --border-default: var(--slate-300);
+  --border-strong: var(--slate-400);
+  --border-focus: var(--slate-400);
+  --border-brand: var(--navy-600);
+
+  /* semantic — interactive */
+  --primary: var(--navy-600);
+  --primary-hover: var(--navy-700);
+  --primary-active: var(--navy-800);
+  --primary-fg: #ffffff;
+  --primary-soft: var(--navy-50);
+  --primary-soft-fg: var(--navy-700);
+  --neutral-solid: var(--slate-900);
+  --neutral-solid-hover: var(--slate-700);
+  --danger: var(--red-600);
+  --danger-hover: var(--red-500);
+  --danger-fg: #ffffff;
+  --danger-soft: var(--red-50);
+  --danger-soft-fg: var(--red-700);
+  --ring: var(--slate-400);
+  --ring-brand: var(--navy-400);
+
+  /* semantic — review status (compliance matrix) */
+  --status-pending-bg: var(--slate-100);
+  --status-pending-fg: var(--slate-600);
+  --status-drafted-bg: var(--blue-100);
+  --status-drafted-fg: var(--blue-700);
+  --status-edited-bg: var(--green-100);
+  --status-edited-fg: var(--green-700);
+  --status-unsure-bg: var(--amber-100);
+  --status-unsure-fg: var(--amber-800);
+  --status-exported-bg: var(--navy-100);
+  --status-exported-fg: var(--navy-700);
+
+  /* typography */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+
+  --text-2xs: 11px;
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 30px;
+  --text-4xl: 36px;
+
+  --leading-none: 1;
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-prose: 1.7;
+
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.02em;
+
+  --type-page-title: var(--weight-bold) var(--text-2xl) / var(--leading-tight) var(--font-sans);
+  --type-hero: var(--weight-bold) var(--text-4xl) / var(--leading-tight) var(--font-sans);
+  --type-section-title: var(--weight-semibold) var(--text-lg) / var(--leading-snug) var(--font-sans);
+  --type-card-title: var(--weight-semibold) var(--text-base) / var(--leading-snug) var(--font-sans);
+  --type-body: var(--weight-normal) var(--text-sm) / var(--leading-normal) var(--font-sans);
+  --type-prose: var(--weight-normal) var(--text-sm) / var(--leading-prose) var(--font-sans);
+  --type-label: var(--weight-medium) var(--text-sm) / var(--leading-none) var(--font-sans);
+  --type-meta: var(--weight-normal) var(--text-xs) / var(--leading-normal) var(--font-sans);
+  --type-badge: var(--weight-medium) var(--text-xs) / var(--leading-normal) var(--font-sans);
+
+  --measure-prose: 72ch;
+
+  /* spacing — 8px system with 4px half-steps */
+  --space-0: 0px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  --gutter-page: var(--space-6);
+  --stack-page: var(--space-6);
+  --stack-list: var(--space-3);
+  --pad-card: var(--space-5);
+  --pad-control-x: var(--space-3);
+  --width-app: 1024px;
+  --width-workspace: 896px;
+  --width-form: 448px;
+  --h-control: 36px;
+  --h-control-sm: 32px;
+  --h-control-lg: 40px;
+  --h-nav: 57px;
+  --sidebar-w: 380px;
+
+  /* elevation — radii + shadows */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-full: 9999px;
+
+  --shadow-none: none;
+  --shadow-xs: 0 1px 2px 0 rgb(15 23 42 / 0.04);
+  --shadow-sm: 0 1px 2px 0 rgb(15 23 42 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(15 23 42 / 0.07), 0 2px 4px -2px rgb(15 23 42 / 0.05);
+  --shadow-lg: 0 10px 15px -3px rgb(15 23 42 / 0.08), 0 4px 6px -4px rgb(15 23 42 / 0.05);
+  --shadow-overlay: 0 24px 48px -12px rgb(15 23 42 / 0.24);
+  --shadow-focus: 0 0 0 2px var(--ring);
+  --shadow-focus-brand: 0 0 0 2px var(--ring-brand);
+
+  --border-width: 1px;
+  --scrim: rgb(15 23 42 / 0.45);
+  --blur-overlay: 2px;
+
+  /* motion */
+  --dur-instant: 80ms;
+  --dur-fast: 150ms;
+  --dur-base: 200ms;
+  --dur-slow: 300ms;
+
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+
+  --transition-colors: color var(--dur-fast) var(--ease-standard),
+    background-color var(--dur-fast) var(--ease-standard),
+    border-color var(--dur-fast) var(--ease-standard);
+  --transition-shadow: box-shadow var(--dur-fast) var(--ease-standard);
+}
+
+/* Dark mode — authored to the design brief; upstream app is light-only.
+   Surfaces step slate-950 -> 900 -> 800; borders are custom low-chroma blues;
+   primary lightens to navy-500/400; status tints become deep desaturated hues. */
+:root[data-theme="dark"] {
+  --surface-app: var(--slate-950);
+  --surface-card: var(--slate-900);
+  --surface-raised: var(--slate-800);
+  --surface-sunken: #0b1424;
+  --surface-inset: #0b1424;
+  --surface-inverse: var(--slate-100);
+  --surface-hover: var(--slate-800);
+  --surface-active: #263449;
+  --surface-selected: var(--navy-950);
+
+  --text-primary: var(--slate-50);
+  --text-body: var(--slate-200);
+  --text-secondary: var(--slate-300);
+  --text-muted: var(--slate-400);
+  --text-placeholder: var(--slate-500);
+  --text-inverse: var(--slate-900);
+  --text-link: var(--navy-300);
+  --text-link-hover: var(--navy-200);
+
+  --border-subtle: #1f2b3f;
+  --border-default: #2c3a52;
+  --border-strong: var(--slate-600);
+  --border-focus: var(--slate-500);
+  --border-brand: var(--navy-400);
+
+  --primary: var(--navy-500);
+  --primary-hover: var(--navy-400);
+  --primary-active: var(--navy-300);
+  --primary-fg: #ffffff;
+  --primary-soft: #17253c;
+  --primary-soft-fg: var(--navy-200);
+  --neutral-solid: var(--slate-100);
+  --neutral-solid-hover: #ffffff;
+  --danger: var(--red-500);
+  --danger-hover: #f87171;
+  --danger-soft: #2a1517;
+  --danger-soft-fg: #fca5a5;
+  --ring: var(--slate-500);
+  --ring-brand: var(--navy-400);
+
+  --status-pending-bg: #1f2b3f;
+  --status-pending-fg: var(--slate-300);
+  --status-drafted-bg: #16294d;
+  --status-drafted-fg: #93b4fb;
+  --status-edited-bg: #102a1c;
+  --status-edited-fg: #86efac;
+  --status-unsure-bg: #33240c;
+  --status-unsure-fg: #fcd34d;
+  --status-exported-bg: #17253c;
+  --status-exported-fg: var(--navy-200);
+
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.4);
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.55), 0 4px 6px -4px rgb(0 0 0 / 0.4);
+  --shadow-overlay: 0 24px 48px -12px rgb(0 0 0 / 0.7);
+  --scrim: rgb(2 6 23 / 0.65);
+}
+
+/* ==========================================================================
+   Base element defaults + the `dd-*` interaction hooks that cannot live in an
+   inline style (hover, focus-visible, placeholder). Ported from tokens/base.css.
+   ========================================================================== */
 
 html,
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--surface-app);
+  color: var(--text-primary);
+}
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
 }
 
-body {
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-    Helvetica, Arial, sans-serif;
+::selection {
+  background: var(--navy-100);
+  color: var(--navy-900);
+}
+:root[data-theme="dark"] ::selection {
+  background: var(--navy-700);
+  color: #fff;
+}
+
+@keyframes dd-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes dd-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes dd-rise {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.dd-focus:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+.dd-focus-brand:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus-brand);
+}
+
+.dd-btn {
+  transition: var(--transition-colors);
+  cursor: pointer;
+}
+.dd-btn:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+.dd-btn-primary:hover {
+  background: var(--primary-hover) !important;
+}
+.dd-btn-primary:active {
+  background: var(--primary-active) !important;
+}
+.dd-btn-neutral:hover {
+  background: var(--neutral-solid-hover) !important;
+}
+.dd-btn-outline:hover {
+  background: var(--surface-hover) !important;
+}
+.dd-btn-ghost:hover {
+  background: var(--surface-hover) !important;
+}
+.dd-btn-secondary:hover {
+  background: var(--surface-active) !important;
+}
+.dd-btn-danger:hover {
+  background: var(--danger-hover) !important;
+}
+
+.dd-field {
+  transition: var(--transition-colors), var(--transition-shadow);
+}
+.dd-field::placeholder {
+  color: var(--text-placeholder);
+}
+.dd-field:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+.dd-field:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.dd-row {
+  transition: var(--transition-colors);
+}
+.dd-row:hover {
+  background: var(--surface-hover);
+}
+.dd-card-link {
+  transition: var(--transition-colors);
+}
+.dd-card-link:hover {
+  border-color: var(--border-strong) !important;
+}
+
+.dd-scroll::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.dd-scroll::-webkit-scrollbar-thumb {
+  background: var(--border-default);
+  border-radius: var(--radius-full);
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+.dd-scroll::-webkit-scrollbar-track {
+  background: transparent;
 }

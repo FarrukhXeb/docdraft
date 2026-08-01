@@ -1,47 +1,137 @@
 import * as React from "react";
-import { cn } from "@/lib/utils";
 
-const Card = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      "rounded-lg border border-slate-200 bg-white shadow-sm",
-      className
-    )}
-    {...props}
-  />
-));
+export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Adds the hover border-darkening used by clickable list cards. */
+  interactive?: boolean;
+}
+
+/** Surface container: 1px subtle border, 8px radius, shadow-sm. Ported from ui/card.tsx. */
+export const Card = React.forwardRef<HTMLDivElement, CardProps>(
+  ({ interactive = false, style, className = "", children, ...rest }, ref) => (
+    <div
+      ref={ref}
+      className={`${interactive ? "dd-card-link" : ""} ${className}`.trim()}
+      style={{
+        background: "var(--surface-card)",
+        border: "1px solid var(--border-subtle)",
+        borderRadius: "var(--radius-lg)",
+        boxShadow: "var(--shadow-sm)",
+        ...style,
+      }}
+      {...rest}
+    >
+      {children}
+    </div>
+  )
+);
 Card.displayName = "Card";
 
-const CardHeader = React.forwardRef<
+/** Card header block — p-5, stacked title/description. */
+export const CardHeader = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("flex flex-col gap-1 p-5", className)} {...props} />
+>(({ style, children, ...rest }, ref) => (
+  <div
+    ref={ref}
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      gap: "var(--space-1)",
+      padding: "var(--pad-card)",
+      ...style,
+    }}
+    {...rest}
+  >
+    {children}
+  </div>
 ));
 CardHeader.displayName = "CardHeader";
 
-const CardTitle = React.forwardRef<
-  HTMLHeadingElement,
-  React.HTMLAttributes<HTMLHeadingElement>
->(({ className, ...props }, ref) => (
-  <h3
-    ref={ref}
-    className={cn("font-semibold text-slate-900", className)}
-    {...props}
-  />
-));
+export interface CardTitleProps
+  extends React.HTMLAttributes<HTMLHeadingElement> {
+  as?: React.ElementType;
+}
+
+/** Semibold card title (16px). */
+export const CardTitle = ({
+  as: As = "h3",
+  style,
+  children,
+  ...rest
+}: CardTitleProps) => (
+  <As
+    style={{
+      margin: 0,
+      font: "var(--type-card-title)",
+      color: "var(--text-primary)",
+      ...style,
+    }}
+    {...rest}
+  >
+    {children}
+  </As>
+);
 CardTitle.displayName = "CardTitle";
 
-const CardContent = React.forwardRef<
+/** Muted one-line description under a CardTitle. */
+export const CardDescription = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLParagraphElement>
+>(({ style, children, ...rest }, ref) => (
+  <p
+    ref={ref}
+    style={{
+      margin: 0,
+      font: "var(--type-body)",
+      color: "var(--text-muted)",
+      ...style,
+    }}
+    {...rest}
+  >
+    {children}
+  </p>
+));
+CardDescription.displayName = "CardDescription";
+
+/** Card body — p-5 with the header's top padding removed. */
+export const CardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("p-5 pt-0", className)} {...props} />
+>(({ style, className = "", children, ...rest }, ref) => (
+  <div
+    ref={ref}
+    className={`dd-card-content ${className}`.trim()}
+    style={{
+      paddingLeft: "var(--pad-card)",
+      paddingRight: "var(--pad-card)",
+      paddingBottom: "var(--pad-card)",
+      ...style,
+    }}
+    {...rest}
+  >
+    {children}
+  </div>
 ));
 CardContent.displayName = "CardContent";
 
-export { Card, CardHeader, CardTitle, CardContent };
+/** Optional footer strip, separated by a subtle rule. */
+export const CardFooter = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ style, children, ...rest }, ref) => (
+  <div
+    ref={ref}
+    style={{
+      display: "flex",
+      alignItems: "center",
+      gap: "var(--space-2)",
+      padding: "var(--pad-card)",
+      borderTop: "1px solid var(--border-subtle)",
+      ...style,
+    }}
+    {...rest}
+  >
+    {children}
+  </div>
+));
+CardFooter.displayName = "CardFooter";
