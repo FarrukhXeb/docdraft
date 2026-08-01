@@ -15,8 +15,8 @@ export default async function LibraryPage() {
       <Nav userEmail={user.email} />
       <main className="mx-auto max-w-5xl space-y-6 px-6 py-8">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Answer Library</h1>
-          <p className="text-slate-600">
+          <h1 className="text-2xl font-bold text-[var(--text-primary)]">Answer Library</h1>
+          <p className="text-[var(--text-secondary)]">
             Reusable, company-approved answers and boilerplate. These feed the AI
             when drafting proposal responses.
           </p>

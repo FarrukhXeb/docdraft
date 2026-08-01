@@ -126,7 +126,7 @@ export function LibraryManager({
                 placeholder="security, compliance"
               />
             </div>
-            {error && <p className="text-sm text-red-700">{error}</p>}
+            {error && <p className="text-sm text-[var(--danger-soft-fg)]">{error}</p>}
             <div className="flex gap-2">
               <Button type="submit" disabled={saving}>
                 {saving ? "Saving..." : editingId ? "Update" : "Add"}
@@ -143,7 +143,7 @@ export function LibraryManager({
 
       <div className="space-y-3">
         {entries.length === 0 && (
-          <p className="text-slate-500">
+          <p className="text-[var(--text-muted)]">
             No entries yet. Add your first approved answer on the left.
           </p>
         )}
@@ -152,11 +152,11 @@ export function LibraryManager({
             <CardContent className="pt-5">
               <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0">
-                  <h3 className="font-semibold text-slate-900">
+                  <h3 className="font-semibold text-[var(--text-primary)]">
                     {entry.topic}
                   </h3>
                   {entry.tags && (
-                    <p className="text-xs text-slate-500">{entry.tags}</p>
+                    <p className="text-xs text-[var(--text-muted)]">{entry.tags}</p>
                   )}
                 </div>
                 <div className="flex shrink-0 gap-1">
@@ -176,7 +176,7 @@ export function LibraryManager({
                   </Button>
                 </div>
               </div>
-              <p className="mt-2 whitespace-pre-wrap text-sm text-slate-700">
+              <p className="mt-2 whitespace-pre-wrap text-sm text-[var(--text-body)]">
                 {entry.content}
               </p>
             </CardContent>

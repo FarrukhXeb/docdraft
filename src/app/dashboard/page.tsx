@@ -22,10 +22,10 @@ export default async function DashboardPage() {
       <Nav userEmail={user.email} />
       <main className="mx-auto max-w-5xl space-y-6 px-6 py-8">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">
+          <h1 className="text-2xl font-bold text-[var(--text-primary)]">
             Welcome{user.name ? `, ${user.name}` : ""}
           </h1>
-          <p className="text-slate-600">
+          <p className="text-[var(--text-secondary)]">
             Build your answer library, then turn RFP questions into drafted
             responses.
           </p>
@@ -38,10 +38,10 @@ export default async function DashboardPage() {
                 <CardTitle>Answer Library</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-3xl font-bold text-slate-900">
+                <p className="text-3xl font-bold text-[var(--text-primary)]">
                   {answerCount}
                 </p>
-                <p className="text-sm text-slate-500">reusable entries</p>
+                <p className="text-sm text-[var(--text-muted)]">reusable entries</p>
               </CardContent>
             </Card>
           </Link>
@@ -52,10 +52,10 @@ export default async function DashboardPage() {
                 <CardTitle>Proposals</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-3xl font-bold text-slate-900">
+                <p className="text-3xl font-bold text-[var(--text-primary)]">
                   {proposalCount}
                 </p>
-                <p className="text-sm text-slate-500">in progress</p>
+                <p className="text-sm text-[var(--text-muted)]">in progress</p>
               </CardContent>
             </Card>
           </Link>

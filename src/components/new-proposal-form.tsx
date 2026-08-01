@@ -99,12 +99,12 @@ export function NewProposalForm() {
               rows={8}
               required
             />
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-[var(--text-muted)]">
               One requirement per line. Numbered or bulleted lines are cleaned up
               automatically.
             </p>
           </div>
-          {error && <p className="text-sm text-red-700">{error}</p>}
+          {error && <p className="text-sm text-[var(--danger-soft-fg)]">{error}</p>}
           <Button type="submit" disabled={saving}>
             {saving ? "Creating..." : "Create proposal"}
           </Button>

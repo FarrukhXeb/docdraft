@@ -18,8 +18,8 @@ export default async function ProposalsPage() {
       <Nav userEmail={user.email} />
       <main className="mx-auto max-w-5xl space-y-6 px-6 py-8">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Proposals</h1>
-          <p className="text-slate-600">
+          <h1 className="text-2xl font-bold text-[var(--text-primary)]">Proposals</h1>
+          <p className="text-[var(--text-secondary)]">
             Start a proposal by pasting the RFP requirements, then generate and
             edit drafted responses.
           </p>
@@ -30,23 +30,23 @@ export default async function ProposalsPage() {
 
           <div className="space-y-3">
             {proposals.length === 0 && (
-              <p className="text-slate-500">No proposals yet.</p>
+              <p className="text-[var(--text-muted)]">No proposals yet.</p>
             )}
             {proposals.map((p) => (
               <Link key={p.id} href={`/proposals/${p.id}`}>
                 <Card className="transition-colors hover:border-slate-400">
                   <CardContent className="flex items-center justify-between pt-5">
                     <div>
-                      <h3 className="font-semibold text-slate-900">
+                      <h3 className="font-semibold text-[var(--text-primary)]">
                         {p.title}
                       </h3>
                       {p.companyName && (
-                        <p className="text-sm text-slate-500">
+                        <p className="text-sm text-[var(--text-muted)]">
                           {p.companyName}
                         </p>
                       )}
                     </div>
-                    <span className="text-sm text-slate-500">
+                    <span className="text-sm text-[var(--text-muted)]">
                       {p._count.requirements} requirements
                     </span>
                   </CardContent>

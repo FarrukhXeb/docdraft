@@ -14,10 +14,10 @@ interface Req {
 }
 
 const statusStyles: Record<string, string> = {
-  pending: "bg-slate-100 text-slate-600",
-  drafted: "bg-blue-100 text-blue-700",
-  edited: "bg-green-100 text-green-700",
-  unsure: "bg-amber-100 text-amber-800",
+  pending: "bg-[var(--status-pending-bg)] text-[var(--status-pending-fg)]",
+  drafted: "bg-[var(--status-drafted-bg)] text-[var(--status-drafted-fg)]",
+  edited: "bg-[var(--status-edited-bg)] text-[var(--status-edited-fg)]",
+  unsure: "bg-[var(--status-unsure-bg)] text-[var(--status-unsure-fg)]",
 };
 
 export function ProposalWorkspace({
@@ -116,8 +116,8 @@ export function ProposalWorkspace({
     <div className="space-y-4">
       <Card>
         <CardContent className="flex flex-wrap items-center justify-between gap-3 pt-5">
-          <div className="text-sm text-slate-600">
-            <span className="font-semibold text-slate-900">
+          <div className="text-sm text-[var(--text-secondary)]">
+            <span className="font-semibold text-[var(--text-primary)]">
               {draftedCount}/{reqs.length}
             </span>{" "}
             requirements drafted
@@ -141,14 +141,14 @@ export function ProposalWorkspace({
       </Card>
 
       {error && (
-        <p className="rounded-md bg-red-50 p-3 text-sm text-red-700">{error}</p>
+        <p className="rounded-md bg-[var(--danger-soft)] p-3 text-sm text-[var(--danger-soft-fg)]">{error}</p>
       )}
 
       {reqs.map((r, i) => (
         <Card key={r.id}>
           <CardContent className="space-y-3 pt-5">
             <div className="flex items-start justify-between gap-4">
-              <h3 className="font-semibold text-slate-900">
+              <h3 className="font-semibold text-[var(--text-primary)]">
                 {i + 1}. {r.prompt}
               </h3>
               <span
