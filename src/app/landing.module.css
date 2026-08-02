@@ -281,7 +281,7 @@
 }
 
 .requirementNumber {
-  color: var(--text-muted);
+  color: var(--text-secondary);
   font-family: var(--font-mono);
   font-size: var(--text-2xs);
 }
@@ -433,6 +433,88 @@
   border-radius: var(--radius-full);
   background: var(--primary);
   content: "";
+}
+
+.walkthroughSection {
+  scroll-margin-top: var(--space-6);
+}
+
+.walkthroughIntro {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-12);
+}
+
+.walkthroughFacts {
+  max-width: 390px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  list-style: none;
+}
+
+.walkthroughFacts li {
+  padding: 7px 10px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  background: var(--surface-card);
+  color: var(--text-secondary);
+  font: var(--type-meta);
+  white-space: nowrap;
+}
+
+.videoFigure {
+  margin: var(--space-10) 0 0;
+}
+
+.videoFrame {
+  padding: var(--space-3);
+  overflow: hidden;
+  border: 1px solid var(--border-default);
+  border-radius: calc(var(--radius-xl) + var(--space-1));
+  background: var(--slate-950);
+  box-shadow: var(--shadow-lg);
+}
+
+.walkthroughVideo {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: block;
+  border-radius: var(--radius-lg);
+  background: var(--slate-950);
+  object-fit: contain;
+}
+
+.videoCaption {
+  margin-top: var(--space-4);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-6);
+  color: var(--text-muted);
+  font: var(--type-meta);
+}
+
+.videoCaption span:first-child {
+  max-width: 76ch;
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.videoCaption svg {
+  margin-top: 1px;
+  flex: 0 0 auto;
+  color: var(--text-link);
+}
+
+.videoCaption span:last-child {
+  flex: 0 0 auto;
+  text-align: right;
 }
 
 .section,
@@ -860,6 +942,29 @@
     gap: var(--space-3) var(--space-5);
   }
 
+  .walkthroughIntro,
+  .videoCaption {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .walkthroughIntro {
+    gap: var(--space-6);
+  }
+
+  .walkthroughFacts {
+    max-width: none;
+    justify-content: flex-start;
+  }
+
+  .videoFrame {
+    padding: var(--space-2);
+  }
+
+  .videoCaption span:last-child {
+    text-align: left;
+  }
+
   .section {
     padding-top: 80px;
   }
@@ -960,6 +1065,19 @@
 
   .pilotCard {
     padding: var(--space-6);
+  }
+
+  .walkthroughFacts li {
+    white-space: normal;
+  }
+
+  .videoFrame {
+    padding: var(--space-1);
+    border-radius: var(--radius-lg);
+  }
+
+  .walkthroughVideo {
+    border-radius: var(--radius-md);
   }
 
   .footerBottom {

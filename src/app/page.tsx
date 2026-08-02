@@ -99,6 +99,9 @@ function PublicHeader() {
           <Logo />
         </Link>
         <nav className={styles.sectionNav} aria-label="Landing page">
+          <a className={`dd-focus ${styles.navLink}`} href="#walkthrough">
+            Walkthrough
+          </a>
           <a className={`dd-focus ${styles.navLink}`} href="#workflow">
             Workflow
           </a>
@@ -240,6 +243,67 @@ export default async function Home() {
             <li>Business-development leads</li>
             <li>Proposal managers</li>
           </ul>
+        </section>
+
+        <section
+          id="walkthrough"
+          className={`${styles.section} ${styles.walkthroughSection}`}
+          aria-labelledby="walkthrough-title"
+        >
+          <div className={styles.walkthroughIntro}>
+            <div className={styles.sectionIntro}>
+              <span className={styles.kicker}>90-second product walkthrough</span>
+              <h2 id="walkthrough-title">See the proposal workflow from source to Word.</h2>
+              <p>
+                Follow public solicitation requirements and fictional, sanitized reusable answers
+                into a structured first draft that remains under proposal-team review.
+              </p>
+            </div>
+            <ul className={styles.walkthroughFacts} aria-label="Walkthrough details">
+              <li>Real DocDraft screens</li>
+              <li>Public NASA SEWP VI source</li>
+              <li>Optional English captions</li>
+            </ul>
+          </div>
+
+          <figure className={styles.videoFigure}>
+            <div className={styles.videoFrame}>
+              <video
+                className={styles.walkthroughVideo}
+                controls
+                preload="metadata"
+                playsInline
+                poster="/media/docdraft-walkthrough/docdraft-walkthrough-poster.webp"
+                aria-label="DocDraft product walkthrough"
+                aria-describedby="walkthrough-caption"
+              >
+                <source
+                  src="/media/docdraft-walkthrough/docdraft-walkthrough-web.mp4"
+                  type="video/mp4"
+                />
+                <track
+                  kind="captions"
+                  src="/media/docdraft-walkthrough/docdraft-walkthrough.vtt"
+                  srcLang="en"
+                  label="English"
+                />
+                <p>
+                  Your browser does not support embedded video. You can{" "}
+                  <a href="/media/docdraft-walkthrough/docdraft-walkthrough-web.mp4">
+                    open the walkthrough video directly
+                  </a>
+                  .
+                </p>
+              </video>
+            </div>
+            <figcaption id="walkthrough-caption" className={styles.videoCaption}>
+              <span>
+                <Icon name="info" size={15} /> Aster Vale Technology and its reusable answers are
+                fictional and sanitized. The solicitation source is public NASA SEWP VI material.
+              </span>
+              <span>Use the player controls to enable English captions.</span>
+            </figcaption>
+          </figure>
         </section>
 
         <section id="workflow" className={styles.section} aria-labelledby="workflow-title">
@@ -395,6 +459,7 @@ export default async function Home() {
           </div>
           <nav aria-label="Product">
             <span>Product</span>
+            <a href="#walkthrough">Walkthrough</a>
             <a href="#workflow">Workflow</a>
             <a href="#why-docdraft">Why DocDraft</a>
             <a href="#pilot">Founding pilot</a>
