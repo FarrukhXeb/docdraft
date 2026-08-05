@@ -157,6 +157,29 @@ describe("OnboardingTourProvider", () => {
     expect(screen.getByText("4 / 6")).toBeVisible();
   });
 
+  it("keeps Back working from the generate step instead of re-advancing", async () => {
+    const user = userEvent.setup();
+    setProfile("pending");
+    const view = render(<App />);
+
+    await user.click(await screen.findByRole("button", { name: "Next" }));
+    await changeRoute(view.rerender);
+    await user.click(await screen.findByRole("button", { name: "Next" }));
+    await changeRoute(view.rerender);
+    await screen.findByRole("heading", { name: "Paste one requirement per line" });
+
+    pathname = "/proposals/proposal-1";
+    await changeRoute(view.rerender);
+    await screen.findByText("4 / 6");
+
+    await user.click(screen.getByRole("button", { name: "Back" }));
+    expect(push).toHaveBeenLastCalledWith("/proposals");
+    await changeRoute(view.rerender);
+
+    expect(await screen.findByRole("heading", { name: "Paste one requirement per line" })).toBeVisible();
+    expect(screen.getByText("3 / 6")).toBeVisible();
+  });
+
   it("waits for a slow route transition before checking the next target", async () => {
     const user = userEvent.setup();
     setProfile("pending");

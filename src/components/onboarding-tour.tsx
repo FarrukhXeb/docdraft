@@ -58,6 +58,7 @@ export function OnboardingTourProvider({
   const [open, setOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const previousFocus = useRef<HTMLElement | null>(null);
+  const autoAdvancedProposalId = useRef<string | null>(null);
   const isProtectedRoute = PROTECTED_ROUTE.test(pathname);
   const detailProposalId = pathname.match(PROPOSAL_ROUTE)?.[1] ?? null;
   const workspaceProposalId = detailProposalId ?? profile?.latestProposalId ?? null;
@@ -187,19 +188,23 @@ export function OnboardingTourProvider({
   }, [isProtectedRoute, loaded, pathname, router]);
 
   useEffect(() => {
-    if (open && currentStep === 2 && detailProposalId) {
-      setProfile((current) =>
-        current ? { ...current, latestProposalId: detailProposalId } : current
-      );
-      setCurrentStep(3);
-    }
-  }, [currentStep, detailProposalId, open]);
-
-  useEffect(() => {
     if (!open) return;
     const step = steps[currentStep];
     if (!step) return;
-    if (currentStep === 2 && detailProposalId) return;
+
+    if (currentStep === 2 && detailProposalId) {
+      if (autoAdvancedProposalId.current !== detailProposalId) {
+        autoAdvancedProposalId.current = detailProposalId;
+        setProfile((current) =>
+          current ? { ...current, latestProposalId: detailProposalId } : current
+        );
+        setCurrentStep(3);
+      } else if (pathname !== step.route) {
+        router.push(step.route);
+      }
+      return;
+    }
+
     if (pathname !== step.route) router.push(step.route);
   }, [currentStep, detailProposalId, open, pathname, router, steps]);
 
