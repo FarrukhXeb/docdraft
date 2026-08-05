@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { OnboardingTourProvider } from "@/components/onboarding-tour";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -25,7 +26,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className="min-h-screen antialiased">
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-        {children}
+        <OnboardingTourProvider>{children}</OnboardingTourProvider>
       </body>
     </html>
   );

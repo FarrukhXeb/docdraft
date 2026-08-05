@@ -4,6 +4,8 @@ import { usePathname, useRouter } from "next/navigation";
 import { signOut } from "@/lib/auth-client";
 import { TopNav, type NavLink } from "@/components/ui/top-nav";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { Button } from "@/components/ui/button";
+import { useOnboardingTour } from "@/components/onboarding-tour";
 
 const links: NavLink[] = [
   { href: "/dashboard", label: "Dashboard", icon: "layout-dashboard" },
@@ -14,6 +16,7 @@ const links: NavLink[] = [
 export function Nav({ userEmail }: { userEmail: string }) {
   const pathname = usePathname();
   const router = useRouter();
+  const { replayTour } = useOnboardingTour();
 
   async function handleSignOut() {
     await signOut();
@@ -31,7 +34,21 @@ export function Nav({ userEmail }: { userEmail: string }) {
       userEmail={userEmail}
       onNavigate={(l) => l.href && router.push(l.href)}
       onSignOut={handleSignOut}
-      right={<ThemeToggle />}
+      right={
+        <div style={{ display: "flex", alignItems: "center", gap: "var(--space-1)" }}>
+          <Button
+            type="button"
+            size="sm"
+            variant="ghost"
+            icon="info"
+            aria-label="Replay product tour"
+            onClick={replayTour}
+          >
+            <span className="dd-tour-replay-label">Product tour</span>
+          </Button>
+          <ThemeToggle />
+        </div>
+      }
     />
   );
 }
