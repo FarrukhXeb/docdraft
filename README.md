@@ -28,6 +28,7 @@ laptop — no cloud, no billing, no deploy.
 - **better-auth** (email/password) — auth as a library on the local Postgres
 - **Provider-agnostic LLM layer** with a working **Groq** implementation
 - **`docx`** npm library for Word export
+- **Vitest + Testing Library** for behavioral component/route tests
 
 ## Prerequisites
 
@@ -78,6 +79,8 @@ proposal by pasting requirements → **Generate missing drafts** → edit → **
 | -------------------- | ---------------------------------------- |
 | `npm run dev`        | Start the dev server                     |
 | `npm run build`      | Production build                         |
+| `npm run test`       | Run the Vitest test suite                |
+| `npm run typecheck`  | Type-check with `tsc --noEmit`           |
 | `npm run db:migrate` | Create/apply a dev migration             |
 | `npm run db:deploy`  | Apply existing migrations (non-dev)      |
 | `npm run db:seed`    | Seed demo user + answer library          |
