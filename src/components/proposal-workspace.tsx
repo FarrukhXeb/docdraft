@@ -123,7 +123,11 @@ export function ProposalWorkspace({
             requirements drafted
           </div>
           <div className="flex flex-wrap gap-2">
-            <Button onClick={() => generateAll(false)} disabled={generating}>
+            <Button
+              data-tour="generate-drafts"
+              onClick={() => generateAll(false)}
+              disabled={generating}
+            >
               {generating ? "Generating..." : "Generate missing drafts"}
             </Button>
             <Button
@@ -133,7 +137,7 @@ export function ProposalWorkspace({
             >
               Regenerate all
             </Button>
-            <a href={`/api/proposals/${proposalId}/export`}>
+            <a data-tour="export-docx" href={`/api/proposals/${proposalId}/export`}>
               <Button variant="secondary">Export .docx</Button>
             </a>
           </div>
@@ -145,7 +149,7 @@ export function ProposalWorkspace({
       )}
 
       {reqs.map((r, i) => (
-        <Card key={r.id}>
+        <Card key={r.id} data-tour={i === 0 ? "requirement-review" : undefined}>
           <CardContent className="space-y-3 pt-5">
             <div className="flex items-start justify-between gap-4">
               <h3 className="font-semibold text-[var(--text-primary)]">

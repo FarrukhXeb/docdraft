@@ -84,7 +84,7 @@ export function NewProposalForm() {
               rows={3}
             />
           </div>
-          <div className="space-y-1.5">
+          <div className="space-y-1.5" data-tour="proposal-form">
             <Label htmlFor="requirements">RFP requirements</Label>
             <Textarea
               id="requirements"

@@ -90,7 +90,7 @@ export function LibraryManager({
 
   return (
     <div className="grid gap-6 lg:grid-cols-[380px_1fr]">
-      <Card className="h-fit">
+      <Card className="h-fit" data-tour="library-entry-form">
         <CardHeader>
           <CardTitle>{editingId ? "Edit entry" : "Add entry"}</CardTitle>
         </CardHeader>

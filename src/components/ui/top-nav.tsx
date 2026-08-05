@@ -43,6 +43,7 @@ export function TopNav({
       {...rest}
     >
       <div
+        className="dd-top-nav-inner"
         style={{
           margin: "0 auto",
           maxWidth,
@@ -54,10 +55,14 @@ export function TopNav({
         }}
       >
         <div
+          className="dd-top-nav-primary"
           style={{ display: "flex", alignItems: "center", gap: "var(--space-6)" }}
         >
           <Logo />
           <nav
+            data-tour="primary-nav"
+            aria-label="Primary navigation"
+            className="dd-top-nav-links"
             style={{
               display: "flex",
               alignItems: "center",
@@ -85,18 +90,20 @@ export function TopNav({
                   }}
                 >
                   {l.icon ? <Icon name={l.icon} size={14} /> : null}
-                  {l.label}
+                  <span className="dd-top-nav-link-label">{l.label}</span>
                 </button>
               );
             })}
           </nav>
         </div>
         <div
+          className="dd-top-nav-actions"
           style={{ display: "flex", alignItems: "center", gap: "var(--space-3)" }}
         >
           {right}
           {userEmail ? (
             <span
+              className="dd-top-nav-email"
               style={{ font: "var(--type-body)", color: "var(--text-muted)" }}
             >
               {userEmail}
@@ -104,12 +111,13 @@ export function TopNav({
           ) : null}
           {onSignOut ? (
             <Button
+              aria-label="Sign out"
               variant="outline"
               size="sm"
               icon="log-out"
               onClick={onSignOut}
             >
-              Sign out
+              <span className="dd-top-nav-signout-label">Sign out</span>
             </Button>
           ) : null}
         </div>

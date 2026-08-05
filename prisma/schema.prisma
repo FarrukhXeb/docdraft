@@ -13,13 +13,14 @@ datasource db {
 // ---------------------------------------------------------------------------
 
 model User {
-  id            String    @id
-  name          String
-  email         String    @unique
-  emailVerified Boolean   @default(false)
-  image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  id                   String               @id
+  name                 String
+  email                String               @unique
+  emailVerified        Boolean              @default(false)
+  image                String?
+  onboardingTourStatus OnboardingTourStatus @default(PENDING)
+  createdAt            DateTime             @default(now())
+  updatedAt            DateTime             @updatedAt
 
   sessions      Session[]
   accounts      Account[]
@@ -29,6 +30,12 @@ model User {
   proposals     Proposal[]
 
   @@map("user")
+}
+
+enum OnboardingTourStatus {
+  PENDING
+  COMPLETED
+  SKIPPED
 }
 
 model Session {

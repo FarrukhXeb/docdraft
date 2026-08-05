@@ -415,3 +415,102 @@ body {
 .dd-scroll::-webkit-scrollbar-track {
   background: transparent;
 }
+
+/* Contextual onboarding tour. Targets remain visible and usable while highlighted. */
+.dd-tour-spotlight {
+  position: fixed;
+  z-index: 1001;
+  pointer-events: none;
+  border: 2px solid var(--border-brand);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 0 0 3px var(--primary-soft), var(--shadow-lg);
+  transition: top var(--dur-base) var(--ease-out), left var(--dur-base) var(--ease-out),
+    width var(--dur-base) var(--ease-out), height var(--dur-base) var(--ease-out);
+}
+.dd-tour-coachmark {
+  position: fixed;
+  z-index: 1002;
+  box-sizing: border-box;
+  padding: var(--space-5);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xl);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-overlay);
+  animation: dd-rise var(--dur-base) var(--ease-out);
+}
+.dd-tour-heading-row,
+.dd-tour-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.dd-tour-eyebrow {
+  margin: var(--space-4) 0 var(--space-1);
+  color: var(--text-link);
+  font: var(--type-badge);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+.dd-tour-title {
+  margin: 0;
+  color: var(--text-primary);
+  font: var(--type-section-title);
+}
+.dd-tour-title:focus {
+  outline: none;
+}
+.dd-tour-description {
+  margin: var(--space-2) 0 var(--space-5);
+  color: var(--text-body);
+  font: var(--type-body);
+}
+
+@media (max-width: 760px) {
+  .dd-top-nav-inner {
+    flex-wrap: wrap;
+    gap: var(--space-2) !important;
+  }
+  .dd-top-nav-primary {
+    display: contents !important;
+  }
+  .dd-top-nav-links {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    justify-content: space-between;
+    padding-top: var(--space-1);
+    border-top: 1px solid var(--border-subtle);
+  }
+  .dd-top-nav-email {
+    display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .dd-tour-replay-label,
+  .dd-top-nav-signout-label {
+    display: none;
+  }
+  .dd-top-nav-actions {
+    gap: var(--space-1) !important;
+  }
+  .dd-top-nav-links button {
+    flex: 1 1 0;
+    justify-content: center;
+    padding-inline: var(--space-2) !important;
+  }
+  .dd-top-nav-link-label {
+    font-size: var(--text-xs);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dd-tour-coachmark {
+    animation: none;
+  }
+  .dd-tour-spotlight {
+    transition: none;
+  }
+}
